@@ -39,7 +39,12 @@ const SuccessModal = ({ isOpen, onClose, formData }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
@@ -52,7 +57,7 @@ const SuccessModal = ({ isOpen, onClose, formData }) => {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="absolute top-4 right-4 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           aria-label="Close modal"
         >
           <X className="h-5 w-5" />
@@ -64,7 +69,10 @@ const SuccessModal = ({ isOpen, onClose, formData }) => {
         </div>
 
         {/* Title */}
-        <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-800 dark:text-slate-100 leading-snug mb-3 font-display">
+        <h3 
+          id="modal-title"
+          className="text-2xl sm:text-3xl font-extrabold text-slate-800 dark:text-slate-100 leading-snug mb-3 font-display"
+        >
           Registration Successful!
         </h3>
         
@@ -120,7 +128,7 @@ const SuccessModal = ({ isOpen, onClose, formData }) => {
         {/* CTA Button */}
         <button
           onClick={onClose}
-          className="w-full gradient-bg text-white py-3.5 rounded-2xl font-bold shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+          className="w-full gradient-bg text-white py-3.5 rounded-2xl font-bold shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Explore Dashboard
         </button>

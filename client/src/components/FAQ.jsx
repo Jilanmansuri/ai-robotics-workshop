@@ -34,9 +34,11 @@ const FAQ = () => {
                 className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden transition-all duration-300"
               >
                 <button
+                  id={`faq-btn-${faq.id}`}
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex items-center justify-between p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                  className="w-full flex items-center justify-between p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:focus-visible:ring-primary-light"
                   aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${faq.id}`}
                 >
                   <span className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-200 hover:text-primary dark:hover:text-primary-light transition-colors">
                     {faq.question}
@@ -48,6 +50,10 @@ const FAQ = () => {
                   </div>
                 </button>
                 <div
+                  id={`faq-panel-${faq.id}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${faq.id}`}
+                  aria-hidden={!isOpen}
                   className={`transition-all duration-300 ease-in-out ${
                     isOpen ? 'max-h-[300px] opacity-100 border-t border-slate-100 dark:border-slate-800' : 'max-h-0 opacity-0 pointer-events-none'
                   }`}

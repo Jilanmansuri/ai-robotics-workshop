@@ -121,8 +121,7 @@ const RegistrationForm = () => {
 
           {/* Actual Form Panel */}
           <div className="lg:col-span-7 bg-slate-50 dark:bg-slate-950 border border-slate-200/50 dark:border-slate-800 rounded-[2.5rem] p-8 sm:p-10 shadow-sm flex flex-col justify-center transition-colors duration-300">
-            
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
               
               {/* Name field */}
               <div className="space-y-2">
@@ -136,15 +135,27 @@ const RegistrationForm = () => {
                   <input
                     type="text"
                     id="name"
-                    {...register('name', { required: 'Student Name is required' })}
+                    {...register('name', {
+                      required: 'Student Name is required',
+                      minLength: { value: 2, message: 'Name must be at least 2 characters' },
+                      maxLength: { value: 50, message: 'Name must not exceed 50 characters' },
+                      pattern: {
+                        value: /^[a-zA-Z\s\-']+$/,
+                        message: 'Name can only contain letters, spaces, hyphens, and apostrophes'
+                      }
+                    })}
                     placeholder="Enter full name"
-                    className={`block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border rounded-2xl shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-primary-light/50 transition-all text-slate-800 dark:text-slate-100 ${
+                    aria-invalid={errors.name ? 'true' : 'false'}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
+                    className={`block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border rounded-2xl shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-primary-light/50 transition-all text-slate-800 dark:text-slate-100 focus-visible:ring-2 focus-visible:ring-primary ${
                       errors.name ? 'border-rose-400 focus:ring-rose-200 dark:focus:ring-rose-900/30' : 'border-slate-200 dark:border-slate-800 focus:border-primary dark:focus:border-primary-light'
                     }`}
                   />
                 </div>
                 {errors.name && (
-                  <p className="text-xs text-rose-500 font-semibold">{errors.name.message}</p>
+                  <p id="name-error" className="text-xs text-rose-500 font-semibold" role="alert">
+                    {errors.name.message}
+                  </p>
                 )}
               </div>
 
@@ -168,13 +179,17 @@ const RegistrationForm = () => {
                       }
                     })}
                     placeholder="parent@example.com"
-                    className={`block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border rounded-2xl shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-primary-light/50 transition-all text-slate-800 dark:text-slate-100 ${
+                    aria-invalid={errors.email ? 'true' : 'false'}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
+                    className={`block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border rounded-2xl shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-primary-light/50 transition-all text-slate-800 dark:text-slate-100 focus-visible:ring-2 focus-visible:ring-primary ${
                       errors.email ? 'border-rose-400 focus:ring-rose-200 dark:focus:ring-rose-900/30' : 'border-slate-200 dark:border-slate-800 focus:border-primary dark:focus:border-primary-light'
                     }`}
                   />
                 </div>
                 {errors.email && (
-                  <p className="text-xs text-rose-500 font-semibold">{errors.email.message}</p>
+                  <p id="email-error" className="text-xs text-rose-500 font-semibold" role="alert">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
@@ -198,13 +213,17 @@ const RegistrationForm = () => {
                       }
                     })}
                     placeholder="Enter 10-digit number"
-                    className={`block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border rounded-2xl shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-primary-light/50 transition-all text-slate-800 dark:text-slate-100 ${
+                    aria-invalid={errors.phone ? 'true' : 'false'}
+                    aria-describedby={errors.phone ? 'phone-error' : undefined}
+                    className={`block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border rounded-2xl shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-primary-light/50 transition-all text-slate-800 dark:text-slate-100 focus-visible:ring-2 focus-visible:ring-primary ${
                       errors.phone ? 'border-rose-400 focus:ring-rose-200 dark:focus:ring-rose-900/30' : 'border-slate-200 dark:border-slate-800 focus:border-primary dark:focus:border-primary-light'
                     }`}
                   />
                 </div>
                 {errors.phone && (
-                  <p className="text-xs text-rose-500 font-semibold">{errors.phone.message}</p>
+                  <p id="phone-error" className="text-xs text-rose-500 font-semibold" role="alert">
+                    {errors.phone.message}
+                  </p>
                 )}
               </div>
 
@@ -212,7 +231,7 @@ const RegistrationForm = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full gradient-bg text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-primary/25 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-75 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2 mt-4"
+                className="w-full gradient-bg text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-primary/25 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-75 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2 mt-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {loading ? (
                   <>
