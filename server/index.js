@@ -47,9 +47,9 @@ app.use(express.json());
 // Database Connection
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGO_URI;
+    const mongoURI = process.env.MONGO_URI || process.env.MONGODB_URI;
     if (!mongoURI && process.env.NODE_ENV === 'production') {
-      throw new Error('MONGO_URI must be provided in production');
+      throw new Error('MONGO_URI or MONGODB_URI must be provided in production');
     }
     const finalURI = mongoURI || 'mongodb://127.0.0.1:27017/ai-robotics-workshop';
     const conn = await mongoose.connect(finalURI);
