@@ -1,6 +1,6 @@
 # RoboCamp - AI & Robotics Summer Workshop Landing Page
 
-A high-performance, accessible, secure, and responsive full-stack landing page for the **AI & Robotics Summer Workshop** (designed for children ages 8–14). Built with a decoupled client-server architecture using React (Vite), Node.js, Express, and MongoDB.
+A high-performance, accessible, secure, and responsive full-stack landing page for the **AI & Robotics Summer Workshop** (designed for children ages 8–14), branded under **RoboCamp**. Built with a decoupled client-server architecture using React (Vite), Node.js, Express, and MongoDB.
 
 ---
 

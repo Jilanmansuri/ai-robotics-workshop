@@ -83,7 +83,7 @@ const RegistrationForm = () => {
             <div className="space-y-8 relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 text-secondary-light">
                 <Sparkles className="h-4 w-4 text-glow" />
-                <span className="text-xs font-bold uppercase tracking-wider">Summer Camp Special</span>
+                <span className="text-xs font-bold uppercase tracking-wider">RoboCamp Exclusive</span>
               </div>
               
               <h3 className="text-2xl sm:text-3xl font-extrabold leading-tight">

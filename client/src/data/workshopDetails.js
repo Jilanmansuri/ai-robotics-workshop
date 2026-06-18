@@ -20,7 +20,7 @@ export const workshopDetails = [
   {
     id: 'mode',
     label: 'Mode',
-    value: 'Online (Live)',
+    value: 'Online',
     description: 'Interactive virtual classes',
     icon: Monitor,
     color: 'text-primary'

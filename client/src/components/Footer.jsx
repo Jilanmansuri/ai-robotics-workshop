@@ -102,7 +102,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="border-t border-slate-800 pt-8 text-center text-xs text-slate-500">
-          <p>© {currentYear} RoboCamp. All rights reserved. Inspired by Kidrove. Made for internship assignment evaluation.</p>
+          <p>© {currentYear} RoboCamp. All rights reserved. Developed for the AI & Robotics Summer Workshop. Made for internship assignment evaluation.</p>
         </div>
 
       </div>

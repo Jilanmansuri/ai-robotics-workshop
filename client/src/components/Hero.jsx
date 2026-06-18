@@ -30,12 +30,12 @@ const Hero = () => {
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glassmorphism dark:glassmorphism-dark text-primary dark:text-primary-light border-primary/20 dark:border-primary/30 shadow-sm animate-bounce">
               <Sparkles className="h-4 w-4" />
-              <span className="text-xs sm:text-sm font-semibold tracking-wide uppercase">AI & Robotics Summer Workshop 2026</span>
+              <span className="text-xs sm:text-sm font-semibold tracking-wide uppercase">Presented by RoboCamp</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-              Unlock Your Child's <br />
-              <span className="gradient-text text-glow">Future in Tech</span>
+              AI & Robotics <br />
+              <span className="gradient-text text-glow">Summer Workshop</span>
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
