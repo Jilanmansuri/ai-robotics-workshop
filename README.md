@@ -19,6 +19,7 @@ A high-performance, accessible, secure, and responsive full-stack landing page f
 
 ---
 
+
 ## 🛠️ Technology Stack
 
 | Layer | Technologies | Key Packages |
