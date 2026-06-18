@@ -13,8 +13,7 @@ export const ThemeProvider = ({ children }) => {
       } catch (e) {
         console.warn('localStorage is not available:', e);
       }
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      return systemPrefersDark ? 'dark' : 'light';
+      return 'light';
     }
     return 'light';
   });
