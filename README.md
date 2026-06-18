@@ -1,21 +1,31 @@
-# AI & Robotics Summer Workshop Landing Page
+# RoboCamp - AI & Robotics Summer Workshop Landing Page
 
-A responsive, high-performance, full-stack landing page for the **AI & Robotics Summer Workshop** (inspired by Kidrove). This project is built using a modern decoupled client-server architecture with React (Vite), Tailwind CSS, Node.js, Express, and MongoDB.
-
-![Hero Robot](./client/src/assets/hero_robot.png)
+A high-performance, accessible, secure, and responsive full-stack landing page for the **AI & Robotics Summer Workshop** (designed for children ages 8–14). Built with a decoupled client-server architecture using React (Vite), Node.js, Express, and MongoDB.
 
 ---
 
 ## 🌟 Key Features
 
-- **Decoupled Architecture**: Clean division between client (Vite, React 18) and server (Express, MongoDB).
-- **Responsive Web Design**: Optimized for Desktop, Tablet, and Mobile devices with modern Tailwind styles.
-- **Glassmorphism & Micro-animations**: Premium visual interface with glowing card designs, custom float animations, and transitions.
-- **Interactive FAQ Accordion**: Sleek and accessible accordion UI for common questions.
-- **Advanced Registration Form**: Integrated with **React Hook Form** for client-side form validation.
-- **Real-time API Validation**: Express validators verify all payloads (Name, Email format, 10-digit Phone numbers).
-- **Interactive Success Celebration**: Utilizes `canvas-confetti` to fire custom particle explosions on successful registration.
-- **API Error Handling**: Captures backend unique constraint violations (e.g. duplicate email registrations) and displays descriptive floating toast alerts.
+* **Decoupled Architecture**: Clean division of concerns with React (Vite) frontend and Node/Express backend.
+* **Modern Aesthetic & Animations**: Clean design featuring dark mode, glassmorphism, responsive grid components, custom floating animations, and dynamic micro-interactions.
+* **Celebration Effects**: Built-in visual canvas confetti fireworks triggered upon successful spot reservation.
+* **Advanced Form Validation**: Responsive validation powered by React Hook Form, matching name patterns, strict email logic, and 10-digit mobile number rules.
+* **API Validation & Error Handling**: Staged validators in the Express router capture syntax errors or duplicate registrations (e.g. duplicate email index), returning appropriate HTTP status alerts.
+* **Robust Security Middlwares**: Integrates Helmet (header security), CORS (controlled origin access), and Express Rate Limit (spam mitigation).
+* **High Accessibility (A11y)**:
+  * WAI-ARIA compliant accordion patterns for FAQ answers.
+  * Inputs linked to label descriptors with helper labels and dynamic `aria-invalid` states.
+  * Visual focus highlights (`focus-visible:ring-2`) enabling standard keyboard navigation.
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies | Key Packages |
+| :--- | :--- | :--- |
+| **Frontend** | React 18, Vite, Tailwind CSS 3 | `lucide-react`, `react-hook-form`, `canvas-confetti` |
+| **Backend** | Node.js, Express | `cors`, `helmet`, `express-rate-limit`, `morgan`, `dotenv` |
+| **Database** | MongoDB | `mongoose` (ODM) |
 
 ---
 
@@ -24,152 +34,192 @@ A responsive, high-performance, full-stack landing page for the **AI & Robotics 
 ```text
 ai-robotics-workshop/
 ├── client/                     # Frontend Project (Vite + React)
-│   ├── public/                 # Static assets (Vite icon, etc.)
+│   ├── public/                 # Public assets (Vite icons, etc.)
 │   ├── src/
-│   │   ├── assets/             # Images (Hero robot illustration)
+│   │   ├── assets/             # Visual image resources (Hero illustrations)
 │   │   ├── components/         # Reusable React components
-│   │   │   ├── FAQ.jsx         # Accordion FAQ
-│   │   │   ├── Footer.jsx      # Page footer
+│   │   │   ├── FAQ.jsx         # Accessible accordion FAQ
+│   │   │   ├── Footer.jsx      # Bottom footer navigation & info
 │   │   │   ├── Hero.jsx        # Landing page Hero section
 │   │   │   ├── LoadingSpinner.jsx
-│   │   │   ├── Navbar.jsx      # Sticky responsive navigation
-│   │   │   ├── RegistrationForm.jsx
+│   │   │   ├── Navbar.jsx      # Sticky navbar with Theme toggle
+│   │   │   ├── RegistrationForm.jsx # spot reservation & validation
 │   │   │   ├── SuccessModal.jsx # Celebration popup
 │   │   │   ├── Toast.jsx       # Floating notifications
 │   │   │   └── WorkshopDetails.jsx
-│   │   ├── data/               # Course data & structures
-│   │   │   ├── faqData.js
-│   │   │   ├── learningOutcomes.js
-│   │   │   └── workshopDetails.js
-│   │   ├── services/           # Axios HTTP client
+│   │   ├── context/            # React global context providers
+│   │   │   └── ThemeContext.jsx # Light/Dark mode state management
+│   │   ├── data/               # Static text contents (FAQ, outcomes)
+│   │   ├── services/           # Axios API Client configurations
 │   │   │   └── api.js
-│   │   ├── App.jsx             # Main layout combiner
-│   │   ├── index.css           # Custom fonts & tailwind overrides
-│   │   └── main.jsx            # Entry point
-│   ├── index.html
-│   ├── package.json
-│   ├── postcss.config.js
-│   ├── tailwind.config.js
-│   └── vite.config.js
+│   │   ├── utils/              # Utility helpers
+│   │   │   └── scroll.js       # DRY smooth scroll helper
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   ├── vite.config.js
+│   └── package.json
 │
 ├── server/                     # Backend API (Node + Express)
 │   ├── controllers/            # Controller business logic
 │   │   └── enquiryController.js
-│   ├── models/                 # Mongoose schema definitions
+│   ├── models/                 # Database Mongoose Schemas
 │   │   └── Enquiry.js
-│   ├── routes/                 # Express Router configuration
+│   ├── routes/                 # Endpoint routing rules
 │   │   └── enquiry.js
-│   ├── .env                    # Local environment config (git-ignored)
-│   ├── index.js                # App entry & db connection
+│   ├── index.js                # Server entry point
 │   └── package.json
 │
-├── .gitignore                  # Root Git ignores (node_modules, .env)
+├── .gitignore                  # Git tracking exclusions
 └── README.md                   # Main documentation
 ```
 
 ---
 
-## ⚙️ Environment Variables
+## ⚙️ Environment Configuration
 
-### Backend Configuration (`server/.env`)
-Create a file named `.env` in the `server` directory and configure the following variables:
+### Backend Config (`server/.env`)
+Create a file named `.env` inside the `server/` directory:
 ```env
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/ai-robotics-workshop
+NODE_ENV=development
 ```
 
-### Frontend Configuration (`client/.env` - Optional)
-By default, the client uses a relative path proxy `/api` in local development via `vite.config.js`. If you need to point to a deployed backend directly, configure this in `client/.env`:
+### Frontend Config (`client/.env` - Optional)
+To point directly to a specific backend server, create a `.env` in the `client/` directory:
 ```env
 VITE_API_URL=http://localhost:5000
 ```
-*(In production, set `VITE_API_URL` to your live Express backend URL.)*
 
 ---
 
-## 🚀 Installation & Local Development
-
-Follow these steps to run the application locally.
+## 🚀 Installation & Local Run
 
 ### Prerequisites
-- Node.js (v18.0.0 or higher recommended)
-- MongoDB running locally on `mongodb://127.0.0.1:27017`
+* **Node.js** (v18.0.0 or higher)
+* **MongoDB** service running locally (default: `mongodb://127.0.0.1:27017`)
 
-### Step 1: Clone the Repository
-```bash
-git clone <repository_url>
-cd ai-robotics-workshop
-```
+### Setup Instructions
 
-### Step 2: Set up the Backend
-```bash
-cd server
-npm install
-```
-1. Create a `server/.env` file and populate it with your local MongoDB URI.
-2. Run the development server:
-```bash
-npm run dev
-```
-The backend will boot and listen on `http://localhost:5000`.
+1. **Clone project repository**:
+   ```bash
+   git clone <repository-url>
+   cd ai-robotics-workshop
+   ```
 
-### Step 3: Set up the Frontend
-Open a new terminal window in the root directory:
-```bash
-cd client
-npm install
-npm run dev
-```
-The Vite development server will spin up on `http://localhost:3000`.
+2. **Run Backend Server**:
+   ```bash
+   cd server
+   npm install
+   npm run dev
+   ```
+   *Server will start listening on [http://localhost:5000](http://localhost:5000)*
+
+3. **Run Frontend Application**:
+   Open a separate shell terminal inside the workspace:
+   ```bash
+   cd client
+   npm install
+   npm run dev
+   ```
+   *Frontend dev server will launch at [http://localhost:3000](http://localhost:3000)*
 
 ---
 
-## 🌐 Deployment Guide
+## 🌐 API Documentation
 
-### Backend Deployment (Render)
+### 1. Health Status check
+* **URL**: `/api/health`
+* **Method**: `GET`
+* **Access**: Public
+* **Response (200 OK)**:
+  ```json
+  {
+    "status": "OK",
+    "message": "Server is running smoothly"
+  }
+  ```
 
-Render is ideal for hosting Express servers with MongoDB connections.
+### 2. Submit Workshop Enquiry / spot reservation
+* **URL**: `/api/enquiry`
+* **Method**: `POST`
+* **Access**: Public
+* **Payload Format (JSON)**:
+  ```json
+  {
+    "name": "Alex Mercer",
+    "email": "alex.mercer@gmail.com",
+    "phone": "9876543210"
+  }
+  ```
+* **Payload Rules**:
+  * `name`: Required, 2-50 characters, only letters, spaces, hyphens, and apostrophes.
+  * `email`: Required, valid email string format. Unique constraint.
+  * `phone`: Required, exactly 10 digits.
 
-1. **Push your code to GitHub**: Create a repository and push the project.
-2. **Log into Render**: Access [render.com](https://render.com) and click **New > Web Service**.
-3. **Connect Repository**: Link your GitHub repository.
-4. **Configure Web Service Parameters**:
-   - **Name**: `ai-robotics-workshop-api`
-   - **Root Directory**: `server`
-   - **Runtime**: `Node`
-   - **Build Command**: `npm install`
-   - **Start Command**: `node index.js` or `npm start`
-5. **Add Environment Variables**:
-   - In the **Environment** tab, click **Add Environment Variable**:
-     - `PORT`: `5000`
-     - `MONGO_URI`: `mongodb+srv://<username>:<password>@cluster.mongodb.net/database?retryWrites=true&w=majority` (Replace with your live MongoDB Atlas connection string).
-6. **Deploy**: Render will automatically build and spin up the backend service. Copy your deployed URL (e.g. `https://ai-robotics-workshop-api.onrender.com`).
+* **Response (201 Created)**:
+  ```json
+  {
+    "success": true,
+    "message": "Registration Successful"
+  }
+  ```
+
+* **Response (400 Bad Request - Validation Error)**:
+  ```json
+  {
+    "success": false,
+    "message": "Validation Failed",
+    "errors": [
+      {
+        "field": "phone",
+        "msg": "Phone number must be exactly 10 digits"
+      }
+    ]
+  }
+  ```
+
+* **Response (400 Bad Request - Duplicate Email Registration)**:
+  ```json
+  {
+    "success": false,
+    "message": "This email is already registered."
+  }
+  ```
+
+* **Response (500 Internal Error)**:
+  ```json
+  {
+    "success": false,
+    "message": "Server Error. Please try again later."
+  }
+  ```
 
 ---
 
-### Frontend Deployment (Vercel)
+## 🌐 Production Deployment Guide
 
-Vercel is optimized for building and serving Vite React projects.
+### Express Server (Render)
+1. In Render Dashboard, select **New > Web Service**.
+2. Connect your GitHub repository.
+3. Configure the following parameters:
+   * **Root Directory**: `server`
+   * **Build Command**: `npm install`
+   * **Start Command**: `npm start`
+4. In the **Environment** settings tab, add variables:
+   * `NODE_ENV` = `production`
+   * `PORT` = `5000`
+   * `MONGO_URI` = *Your MongoDB Atlas connection URI string*
+   * `CLIENT_URL` = *Your deployed Vercel frontend URL*
 
-1. **Log into Vercel**: Access [vercel.com](https://vercel.com) and select **Add New > Project**.
-2. **Import Repository**: Link your GitHub repository.
-3. **Configure Project Settings**:
-   - **Framework Preset**: `Vite` (Vercel auto-detects this).
-   - **Root Directory**: `client`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-4. **Configure Environment Variables**:
-   - Add a new environment variable:
-     - `VITE_API_URL`: `https://your-backend-url.onrender.com` (Use the Render service URL copied above without a trailing slash).
-5. **Deploy**: Click **Deploy**. Vercel will build your static bundle and serve it on a secure `https` subdomain.
-
----
-
-## 📝 Workshop Details Summary
-
-- **Title**: AI & Robotics Summer Workshop
-- **Age Group**: 8–14 Years
-- **Duration**: 4 Weeks (Interactive Live Sessions)
-- **Mode**: Online
-- **Fee**: ₹2,999 (All Inclusive)
-- **Start Date**: 15 July 2026
+### React App (Vercel)
+1. In Vercel, select **Add New > Project**.
+2. Connect the repository.
+3. Set the configuration parameters:
+   * **Framework Preset**: `Vite`
+   * **Root Directory**: `client`
+   * **Build Command**: `npm run build`
+   * **Output Directory**: `dist`
+4. Add the Environment Variable:
+   * `VITE_API_URL` = *Your deployed Render backend API URL without trailing slash*
