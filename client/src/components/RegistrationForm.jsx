@@ -55,7 +55,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <section id="register" className="py-20 bg-white relative overflow-hidden">
+    <section id="register" className="py-20 bg-white dark:bg-slate-900 relative overflow-hidden transition-colors duration-300">
       {/* Decorative Blob */}
       <div className="absolute right-[-10%] bottom-[-10%] w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
 
@@ -63,10 +63,10 @@ const RegistrationForm = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Reserve a Spot for <span className="gradient-text">Your Child</span>
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg">
+          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg">
             Complete the form below to enroll. Hurry! Early bird registrations get full access to course toolboxes.
           </p>
           <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
@@ -76,7 +76,7 @@ const RegistrationForm = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           
           {/* Info Side Panel */}
-          <div className="lg:col-span-5 bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-[2.5rem] p-8 sm:p-10 flex flex-col justify-between shadow-xl relative overflow-hidden">
+          <div className="lg:col-span-5 bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-[2.5rem] p-8 sm:p-10 flex flex-col justify-between shadow-xl relative overflow-hidden border border-slate-800/80">
             {/* Background patterns */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-20"></div>
             
@@ -120,13 +120,13 @@ const RegistrationForm = () => {
           </div>
 
           {/* Actual Form Panel */}
-          <div className="lg:col-span-7 bg-slate-50 border border-slate-200/50 rounded-[2.5rem] p-8 sm:p-10 shadow-sm flex flex-col justify-center">
+          <div className="lg:col-span-7 bg-slate-50 dark:bg-slate-950 border border-slate-200/50 dark:border-slate-800 rounded-[2.5rem] p-8 sm:p-10 shadow-sm flex flex-col justify-center transition-colors duration-300">
             
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               
               {/* Name field */}
               <div className="space-y-2">
-                <label htmlFor="name" className="block text-sm font-bold text-slate-700">
+                <label htmlFor="name" className="block text-sm font-bold text-slate-700 dark:text-slate-300">
                   Student Name
                 </label>
                 <div className="relative">
@@ -138,8 +138,8 @@ const RegistrationForm = () => {
                     id="name"
                     {...register('name', { required: 'Student Name is required' })}
                     placeholder="Enter full name"
-                    className={`block w-full pl-11 pr-4 py-3.5 bg-white border rounded-2xl shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all ${
-                      errors.name ? 'border-rose-400 focus:ring-rose-200' : 'border-slate-200 focus:border-primary'
+                    className={`block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border rounded-2xl shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-primary-light/50 transition-all text-slate-800 dark:text-slate-100 ${
+                      errors.name ? 'border-rose-400 focus:ring-rose-200 dark:focus:ring-rose-900/30' : 'border-slate-200 dark:border-slate-800 focus:border-primary dark:focus:border-primary-light'
                     }`}
                   />
                 </div>
@@ -150,7 +150,7 @@ const RegistrationForm = () => {
 
               {/* Email field */}
               <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm font-bold text-slate-700">
+                <label htmlFor="email" className="block text-sm font-bold text-slate-700 dark:text-slate-300">
                   Email Address
                 </label>
                 <div className="relative">
@@ -168,8 +168,8 @@ const RegistrationForm = () => {
                       }
                     })}
                     placeholder="parent@example.com"
-                    className={`block w-full pl-11 pr-4 py-3.5 bg-white border rounded-2xl shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all ${
-                      errors.email ? 'border-rose-400 focus:ring-rose-200' : 'border-slate-200 focus:border-primary'
+                    className={`block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border rounded-2xl shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-primary-light/50 transition-all text-slate-800 dark:text-slate-100 ${
+                      errors.email ? 'border-rose-400 focus:ring-rose-200 dark:focus:ring-rose-900/30' : 'border-slate-200 dark:border-slate-800 focus:border-primary dark:focus:border-primary-light'
                     }`}
                   />
                 </div>
@@ -180,7 +180,7 @@ const RegistrationForm = () => {
 
               {/* Phone field */}
               <div className="space-y-2">
-                <label htmlFor="phone" className="block text-sm font-bold text-slate-700">
+                <label htmlFor="phone" className="block text-sm font-bold text-slate-700 dark:text-slate-300">
                   Phone Number
                 </label>
                 <div className="relative">
@@ -198,8 +198,8 @@ const RegistrationForm = () => {
                       }
                     })}
                     placeholder="Enter 10-digit number"
-                    className={`block w-full pl-11 pr-4 py-3.5 bg-white border rounded-2xl shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all ${
-                      errors.phone ? 'border-rose-400 focus:ring-rose-200' : 'border-slate-200 focus:border-primary'
+                    className={`block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-900 border rounded-2xl shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 dark:focus:ring-primary-light/50 transition-all text-slate-800 dark:text-slate-100 ${
+                      errors.phone ? 'border-rose-400 focus:ring-rose-200 dark:focus:ring-rose-900/30' : 'border-slate-200 dark:border-slate-800 focus:border-primary dark:focus:border-primary-light'
                     }`}
                   />
                 </div>

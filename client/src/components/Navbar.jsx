@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Cpu, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { smoothScrollTo } from '../utils/scroll';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,16 +29,8 @@ const Navbar = () => {
 
   const handleLinkClick = (e, href) => {
     e.preventDefault();
-    const targetElement = document.querySelector(href);
-    if (targetElement) {
-      const navHeight = 80; // height of the navbar
-      const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth',
-      });
-      setIsOpen(false);
-    }
+    smoothScrollTo(href);
+    setIsOpen(false);
   };
 
   return (
@@ -65,7 +58,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light transition-colors duration-200 relative group"
+                  className="font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light transition-colors duration-200 relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg px-2 py-1"
                 >
                   {link.name}
                   <span className="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
@@ -76,7 +69,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={toggleTheme}
-              className="p-2 rounded-xl bg-slate-100/80 hover:bg-slate-200/80 dark:bg-slate-800/80 dark:hover:bg-slate-700/80 text-slate-600 dark:text-slate-300 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+              className="p-2 rounded-xl bg-slate-100/80 hover:bg-slate-200/80 dark:bg-slate-800/80 dark:hover:bg-slate-700/80 text-slate-600 dark:text-slate-300 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun className="h-5 w-5 text-amber-400" /> : <Moon className="h-5 w-5" />}
@@ -84,7 +77,7 @@ const Navbar = () => {
             <a
               href="#register"
               onClick={(e) => handleLinkClick(e, '#register')}
-              className="gradient-bg text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95"
+              className="gradient-bg text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Enroll Now
             </a>
@@ -96,15 +89,17 @@ const Navbar = () => {
             <button
               type="button"
               onClick={toggleTheme}
-              className="p-2 rounded-xl bg-slate-100/80 hover:bg-slate-200/80 dark:bg-slate-800/80 dark:hover:bg-slate-700/80 text-slate-600 dark:text-slate-300 transition-all duration-200 cursor-pointer"
+              className="p-2 rounded-xl bg-slate-100/80 hover:bg-slate-200/80 dark:bg-slate-800/80 dark:hover:bg-slate-700/80 text-slate-600 dark:text-slate-300 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun className="h-5 w-5 text-amber-400" /> : <Moon className="h-5 w-5" />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-700 dark:text-slate-300 hover:text-primary p-2 focus:outline-none"
+              className="text-slate-700 dark:text-slate-300 hover:text-primary p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -113,8 +108,11 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Drawer */}
-      <div className={`md:hidden absolute top-full left-0 right-0 glassmorphism shadow-lg border-t border-slate-200/50 dark:border-slate-800 transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-80 opacity-100 py-4' : 'max-h-0 opacity-0 pointer-events-none'
-        }`}>
+      <div 
+        id="mobile-menu"
+        className={`md:hidden absolute top-full left-0 right-0 glassmorphism shadow-lg border-t border-slate-200/50 dark:border-slate-800 transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-80 opacity-100 py-4' : 'max-h-0 opacity-0 pointer-events-none'
+        }`}
+      >
         <div className="px-4 space-y-3">
           {navLinks.map((link) => (
             <a

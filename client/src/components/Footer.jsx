@@ -1,20 +1,13 @@
 import React from 'react';
 import { Cpu, Mail, Phone, MapPin } from 'lucide-react';
+import { smoothScrollTo } from '../utils/scroll';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const handleLinkClick = (e, href) => {
     e.preventDefault();
-    const targetElement = document.querySelector(href);
-    if (targetElement) {
-      const navHeight = 80;
-      const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth',
-      });
-    }
+    smoothScrollTo(href);
   };
 
   return (

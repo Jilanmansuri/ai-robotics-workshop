@@ -1,32 +1,17 @@
 import React from 'react';
-import { ArrowRight, Sparkles, Trophy, ShieldAlert } from 'lucide-react';
+import { ArrowRight, Sparkles, Trophy } from 'lucide-react';
 import robotImage from '../assets/hero_robot.png';
+import { smoothScrollTo } from '../utils/scroll';
 
 const Hero = () => {
   const handleScrollToRegister = (e) => {
     e.preventDefault();
-    const targetElement = document.querySelector('#register');
-    if (targetElement) {
-      const navHeight = 80;
-      const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth',
-      });
-    }
+    smoothScrollTo('#register');
   };
 
   const handleScrollToOutcomes = (e) => {
     e.preventDefault();
-    const targetElement = document.querySelector('#outcomes');
-    if (targetElement) {
-      const navHeight = 80;
-      const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth',
-      });
-    }
+    smoothScrollTo('#outcomes');
   };
 
   return (
